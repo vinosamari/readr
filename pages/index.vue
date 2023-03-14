@@ -1,9 +1,11 @@
 <template>
-  <Tutorial/>
+  <file-section />
 </template>
 
 <script>
+import FileSection from "~/components/FileSection.vue";
 export default {
-  name: 'IndexPage'
-}
+  components: { FileSection },
+  name: "IndexPage",
+};
 </script>
