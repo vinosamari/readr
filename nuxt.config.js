@@ -5,7 +5,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "READR | GENERATIVE Q&A WEB APP",
+    title: "MY READR | GENERATIVE Q&A WEB APP",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -38,6 +38,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     "@nuxtjs/tailwindcss",
+    "nuxt-animejs",
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

@@ -1,8 +1,12 @@
 <template>
-  <section>
+  <section class="navbar">
     <div class="logo">
       <img src="https://i.postimg.cc/d3MG7tgP/document.png" alt="logo" />
-      <span>Readr.Reply</span>
+      <span>MyReadr</span>
+    </div>
+    <div class="navLinks">
+      <button @click="$store.commit('TOGGLE_ABOUT')">About</button>
+      <button>Help</button>
     </div>
     <div class="loginGroup">
       <form @submit.prevent="loginUser">
@@ -21,8 +25,20 @@
 
 <script>
 export default {
+  mounted() {
+    this.staggering();
+  },
   methods: {
     loginUser() {},
+    staggering() {
+      const anime = this.$anime;
+      anime({
+        targets: ".navbar div",
+        opacity: [0, 1],
+        delay: anime.stagger(250), // increase delay by 100ms for each elements.
+        duration: 1500,
+      });
+    },
   },
   data() {
     return {
@@ -31,16 +47,17 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Dokdo&display=swap");
 section {
+  font-family: "Dokdo";
   @apply flex p-3 justify-between w-3/4 shadow-2xl rounded-3xl fixed left-40 top-10 px-8;
 }
 .logo {
   @apply flex gap-1 items-center;
 }
 .logo span {
-  font-family: "Dokdo";
   @apply text-2xl tracking-wide text-indigo-900;
 }
 img {
@@ -54,6 +71,10 @@ input {
   @apply shadow-lg rounded-xl px-3 py-1 focus:ring-0 hover:cursor-pointer hover:ring-indigo-700;
 }
 button {
-  @apply bg-indigo-500  rounded-xl shadow-lg px-3 py-1 text-xl hover:bg-white hover:text-indigo-800 text-white;
+  @apply bg-indigo-500  rounded-xl shadow-lg px-3 py-1 text-xl hover:bg-white hover:text-indigo-800 text-white hover:rounded-2xl transition-all duration-300 ease-in-out;
+}
+
+.navLinks button {
+  @apply text-lg tracking-tight shadow-md hover:shadow-xl bg-transparent text-indigo-700 rounded-sm transition-all duration-300 ease-in-out mx-2 hover:bg-indigo-700 hover:text-white hover:rounded-2xl;
 }
 </style>
