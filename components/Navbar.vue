@@ -1,5 +1,5 @@
 <template>
-  <section class="navbar">
+  <section class="navbar notMobile">
     <div class="logo">
       <img src="https://i.postimg.cc/d3MG7tgP/document.png" alt="logo" />
       <span>Readr</span>
@@ -82,11 +82,13 @@ input {
 button {
   @apply bg-indigo-500  rounded-xl shadow-lg px-3 py-1 text-xl hover:bg-white hover:text-indigo-800 text-white hover:rounded-2xl transition-all duration-300 ease-in-out;
 }
-
 .navLinks button {
   @apply text-lg tracking-tight shadow-md hover:shadow-xl bg-transparent text-indigo-700 rounded-sm transition-all duration-300 ease-in-out mx-2 hover:bg-indigo-700 hover:text-white hover:rounded-2xl;
 }
 .navLinks button.active {
   @apply bg-indigo-700 text-white rounded-2xl;
+}
+.notMobile {
+  @apply md:flex hidden;
 }
 </style>

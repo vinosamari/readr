@@ -44,13 +44,18 @@ export default {
         href: "https://fonts.googleapis.com/css2?family=Dokdo&display=swap",
       },
     ],
+    script: [
+      {
+        src: "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2",
+      },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ["~/assets/css/styles.css"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [{ src: "~/plugins/supabase.js", mode: "client" }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
