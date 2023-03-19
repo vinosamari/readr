@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import { SUPA } from "@/plugins/supabase";
 export default {
   mounted() {
     this.fadeElements();
