@@ -59,7 +59,6 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Dokdo&display=swap");
 section {
   font-family: "Dokdo";
   @apply flex p-3 justify-between w-3/4 shadow-2xl rounded-3xl fixed left-40 top-10 px-8;
