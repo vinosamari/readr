@@ -1,6 +1,12 @@
 <template>
   <div class="wrapper">
     <h1 class="header">History</h1>
+    <section v-if="$store.state.currentUser">
+      <!-- DISPLAY HISTORY -->
+    </section>
+    <section v-else>
+      <p>Nothing to see here. Log in to access your conversation history.</p>
+    </section>
     <!-- <table class="table-auto">
       <thead class="">
         <tr>
@@ -62,7 +68,10 @@ export default {
 }
 h1 {
   font-family: "Dokdo";
-  @apply text-2xl mt-48;
+  @apply text-2xl mt-56;
+}
+p {
+  @apply text-center text-xs italic leading-9 tracking-wider p-5 rounded-2xl shadow;
 }
 table {
   font-family: "Baumans";

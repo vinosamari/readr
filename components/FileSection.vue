@@ -2,26 +2,26 @@
   <div>
     <form @submit.prevent="loadFile">
       <h2 class="subheader">Select a file to interact with:</h2>
-      <section>
+      <section v-if="!urlFileTitle">
         <input type="file" ref="fileInput" @change="setTitle" />
         <button type="submit">Upload</button>
       </section>
-      <section>
+      <section class="flex gap-2 items-center" v-if="!uploadFileTitle">
         <input
           type="url"
           name="url"
           id="url"
           placeholder="Enter url here..."
-          :disabled="!fileTitle"
+          v-model="urlFileTitle"
         />
-        <button type="submit" class="btn">Submit Url</button>
+
+        <button type="submit" class="btn" :disabled="!urlFileTitle">
+          Submit
+        </button>
       </section>
     </form>
     <h3 v-if="fileUploadProgress > 0" class="text-center">
       {{ fileUploadProgress }}% Uploaded
-    </h3>
-    <h3 v-if="fileTitle" class="text-center">
-      {{ fileTitle }}
     </h3>
   </div>
 </template>
@@ -31,17 +31,19 @@ export default {
   data() {
     return {
       fileUploadProgress: 0,
-      fileTitle: "",
+      urlFileTitle: "",
+      uploadFileTitle: "",
+      fileAvailable: false,
     };
   },
   methods: {
     async loadFile() {
       let fileObj = {
-        title: this.fileTitle,
+        title: this.uploadFileTitle ? this.uploadFileTitle : this.urlFileTitle,
       };
 
       const file = this.$refs.fileInput.files[0];
-      const storageRef = this.$fire.storage.ref("files/").child(this.fileTitle);
+      const storageRef = this.$fire.storage.ref("files/").child(fileObj.title);
       try {
         storageRef.put(file).on(
           "state_changed",
@@ -74,7 +76,8 @@ export default {
                   console.error("Error writing document: ", error);
                 });
 
-              this.fileTitle = "";
+              this.urlFileTitle = "";
+              this.uploadFileTitle = "";
               this.fileUploadProgress = 0;
               console.log("File available at", downloadURL);
             });
@@ -87,10 +90,12 @@ export default {
     setTitle(event) {
       // IF THERE ARE ANY FILES READY
       if (event.target.files.length > 0) {
+        this.fileAvailable = true;
         const file = event.target.files[0];
-        this.fileTitle = file.name;
+        this.uploadFileTitle = file.name;
       } else {
-        this.fileTitle = "";
+        this.uploadFileTitle = "";
+        this.fileAvailable = false;
       }
     },
   },
@@ -102,25 +107,26 @@ div {
   font-family: "Baumans";
   @apply text-center bg-gradient-to-br from-indigo-400 via-indigo-300 min-h-screen px-4 flex flex-col justify-center;
 }
-.header {
-  font-family: "Encode Sans Expanded";
-  @apply text-3xl font-bold uppercase tracking-wider my-8;
+.subheader {
+  font-family: "Dokdo";
+  @apply text-xl font-bold uppercase tracking-wider my-8;
 }
 form {
-  @apply flex flex-col mx-auto p-5 w-3/4;
+  font-family: "Dokdo";
+  @apply flex flex-col mx-auto;
 }
 button,
 input[type="file"] {
   @apply bg-indigo-700  text-white px-4 py-2 rounded-xl my-3 tracking-wider capitalize hover:cursor-pointer;
 }
 input {
-  @apply bg-indigo-400  px-4 w-3/4 py-2 placeholder-black shadow-md rounded-2xl focus:bg-white focus:text-black;
+  @apply bg-indigo-400  px-4 w-3/4 py-2 placeholder-black shadow-md rounded-2xl focus:bg-white focus:ring-indigo-500;
 }
 input[type="file"] {
-  @apply w-3/4 shadow-md rounded-2xl my-10 text-sm bg-indigo-400;
+  @apply w-3/4 shadow-md rounded-2xl my-10 text-sm bg-indigo-400 focus:ring-indigo-500;
 }
-input:disabled {
-  @apply bg-opacity-40 placeholder:text-gray-200 shadow-inner;
+button:disabled {
+  @apply bg-indigo-200 shadow-inner text-indigo-300;
 }
 button {
   @apply py-1 shadow-xl transform transition-all duration-300 ease-linear  hover:scale-105;

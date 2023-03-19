@@ -1,17 +1,22 @@
 <template>
   <div class="aboutSection" v-if="showAboutSection">
     <h2 class="aboutContent">
-      Welcome to <span>Readr</span>, your smart and friendly personal research
-      assistant that helps you unlock the power of knowledge. Just upload a file
-      or input a URL, and our powerful algorithm breaks down complex content
-      into digestible chunks, giving you the information you need without
-      overwhelming you with unnecessary details. Think of <span>Readr</span> as
-      your own personal fact-checker, separating fact from fiction and helping
-      you make informed decisions. Whether you're a student, a researcher, or
-      just someone who loves to learn, <span>Readr</span> is the perfect tool to
-      help you navigate the vast landscape of information and discover hidden
-      gems along the way. Start your journey today and unlock the wonders of the
-      world.
+      Discover the power of knowledge with <span>Readr</span> - your personal
+      research assistant! Our friendly chat interface makes it easy to upload a
+      file or input a URL, and our powerful algorithm breaks down complex
+      content into digestible chunks, giving you the information you need
+      without overwhelming you with unnecessary details. With
+      <span>Readr</span> as your personal fact-checker, you can separate fact
+      from fiction and make informed decisions. In the next update, we're adding
+      exciting new features to make your experience even more engaging! Our chat
+      bot will have its own unique personality, bringing an added level of fun
+      and interest to your research journey. At <span>Readr</span>, we value
+      your privacy. We never store any data unless you log in with your email
+      address, in which case we create a secure storage bucket for you. By
+      default, documents and conversation history have a 72-hour shelf life,
+      ensuring that your sensitive data is safe yet accessible. Join the
+      <span>Readr</span> community today and unlock hidden gems in the vast
+      landscape of information!
     </h2>
   </div>
 </template>
