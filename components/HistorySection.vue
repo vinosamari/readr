@@ -1,41 +1,46 @@
 <template>
   <div class="wrapper">
     <h1 class="header">History</h1>
-    <section v-if="$store.state.currentUser">
+    <section v-if="$store.state.currentUser !== null">
       <!-- DISPLAY HISTORY -->
+      <table class="">
+        <thead class="">
+          <tr>
+            <th>File</th>
+            <th>Last Used</th>
+            <th>Saved Responses</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            class=""
+            v-for="history in $store.state.currentUser.history"
+            :key="history.filename"
+          >
+            <td class="text-base">
+              {{ truncateFilename(history.filename) }}
+            </td>
+            <td>{{ history.lastConversation }}</td>
+            <td class="text-lg">{{ history.savedResponses.length }}</td>
+            <td><i class="fa fa-trash fa-lg"></i></td>
+          </tr>
+        </tbody>
+      </table>
     </section>
     <section v-else>
-      <p>Nothing to see here. Log in to access your conversation history.</p>
+      <p>
+        Nothing to see here yet. Log in to access your conversation history.
+      </p>
     </section>
-    <!-- <table class="table-auto">
-      <thead class="">
-        <tr>
-          <th>File</th>
-          <th>Last Used</th>
-          <th>Saved Responses</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody v-if="history.length > 0">
-        <tr>
-          <td>
-            {{
-              truncateFilename(
-                "The Sliding Mr. Bones (Next Stop, Pottersville).pdf"
-              )
-            }}
-          </td>
-          <td>Malcolm Lockyer</td>
-          <td>1961</td>
-          <td><i class="fa fa-trash"></i></td>
-        </tr>
-      </tbody>
-    </table> -->
   </div>
 </template>
 
 <script>
 export default {
+  mounted() {
+    this.fadeElements();
+  },
   methods: {
     truncateFilename(filename, maxLength = 30) {
       const extension = filename.split(".").pop();
@@ -47,6 +52,17 @@ export default {
         basename.length > maxLength ? "..." : ""
       }`;
       return `${truncatedBasename}.${extension}`;
+    },
+    fadeElements() {
+      const anime = this.$anime;
+
+      anime({
+        targets: "div section",
+        opacity: [0, 1],
+        duration: 1000,
+        delay: anime.stagger(400),
+        easing: "easeInOutQuad",
+      });
     },
   },
   computed: {
@@ -71,13 +87,20 @@ h1 {
   @apply text-2xl mt-56;
 }
 p {
-  @apply text-center text-xs italic leading-9 tracking-wider p-5 rounded-2xl shadow;
+  font-family: "Dokdo";
+  @apply text-center text-lg leading-9 tracking-wider p-2 rounded-2xl shadow;
 }
 table {
-  font-family: "Baumans";
-  @apply text-sm w-full;
+  font-family: "Dokdo";
+  @apply w-full table-fixed text-xs text-center my-3 p-2;
+}
+th {
+  @apply text-lg;
 }
 tr {
-  @apply flex items-center gap-3 justify-between whitespace-pre;
+  @apply p-2 even:bg-indigo-100 odd:bg-indigo-200;
+}
+i {
+  @apply p-2 rounded-2xl shadow-md hover:cursor-pointer transform transition-all duration-300 ease-in-out hover:scale-125;
 }
 </style>

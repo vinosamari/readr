@@ -2,11 +2,14 @@
   <div>
     <navbar v-if="showNavbar" :class="{ 'nav-hidden': !showNavbar }"></navbar>
     <nuxt></nuxt>
+    <my-footer></my-footer>
   </div>
 </template>
 
 <script>
+import MyFooter from "~/components/MyFooter.vue";
 export default {
+  components: { MyFooter },
   data() {
     return {
       showNavbar: true,

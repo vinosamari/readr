@@ -28,6 +28,9 @@
 
 <script>
 export default {
+  mounted() {
+    this.fadeElements();
+  },
   data() {
     return {
       fileUploadProgress: 0,
@@ -97,6 +100,17 @@ export default {
         this.uploadFileTitle = "";
         this.fileAvailable = false;
       }
+    },
+    fadeElements() {
+      const anime = this.$anime;
+
+      anime({
+        targets: "form section",
+        opacity: [0, 1],
+        duration: 1000,
+        delay: anime.stagger(300),
+        easing: "easeInOutQuad",
+      });
     },
   },
 };

@@ -66,7 +66,7 @@ export default {
 <style scoped>
 .aboutSection {
   font-family: "Gloria Hallelujah";
-  @apply rounded-2xl bg-indigo-800 flex flex-col items-center justify-center shadow-xl text-white tracking-widest mx-auto fixed inset-0 w-5/6 h-auto top-1/4 z-50 text-xl p-5 text-center leading-relaxed;
+  @apply rounded-2xl bg-indigo-800 flex flex-col items-center justify-center shadow-xl text-white tracking-widest mx-auto fixed inset-0 w-5/6 h-auto top-1/4 z-50 text-lg p-5 text-center leading-relaxed;
 }
 h2 span {
   font-family: "Dokdo";

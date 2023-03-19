@@ -15,7 +15,7 @@
       </button>
       <button>Help</button>
     </div>
-    <div class="loginGroup">
+    <div class="loginGroup" v-if="$store.state.currentUser === null">
       <form @submit.prevent="loginUser">
         <input
           type="email"
@@ -24,8 +24,11 @@
           v-model="email"
           placeholder="you@example.com"
         />
-        <button>Login</button>
+        <button @click="$store.commit('TOGGLE_USER')">Login</button>
       </form>
+    </div>
+    <div v-else>
+      <button @click="$store.commit('TOGGLE_USER')">Log out</button>
     </div>
   </section>
 </template>
