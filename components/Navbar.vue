@@ -2,10 +2,17 @@
   <section class="navbar">
     <div class="logo">
       <img src="https://i.postimg.cc/d3MG7tgP/document.png" alt="logo" />
-      <span>MyReadr</span>
+      <span>Readr</span>
     </div>
     <div class="navLinks">
-      <button @click="$store.commit('TOGGLE_ABOUT')">About</button>
+      <button
+        @click="$store.commit('TOGGLE_ABOUT')"
+        :class="{
+          active: $store.state.showAbout,
+        }"
+      >
+        About
+      </button>
       <button>Help</button>
     </div>
     <div class="loginGroup">
@@ -76,5 +83,8 @@ button {
 
 .navLinks button {
   @apply text-lg tracking-tight shadow-md hover:shadow-xl bg-transparent text-indigo-700 rounded-sm transition-all duration-300 ease-in-out mx-2 hover:bg-indigo-700 hover:text-white hover:rounded-2xl;
+}
+.navLinks button.active {
+  @apply bg-indigo-700 text-white rounded-2xl;
 }
 </style>

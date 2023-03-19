@@ -36,7 +36,7 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Baumans&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@100;200;300;400;500;600;700;800;900&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap");
 body {
   @apply transition-all duration-500 ease-in-out;
 }

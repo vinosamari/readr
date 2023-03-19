@@ -1,5 +1,7 @@
 export const state = () => ({
-  currentUser: null,
+  currentUser: {
+    history: ["one", "two"],
+  },
   showAbout: false,
 });
 

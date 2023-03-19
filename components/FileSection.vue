@@ -100,14 +100,14 @@ export default {
 <style scoped>
 div {
   font-family: "Baumans";
-  @apply text-center bg-gradient-to-br from-indigo-400 via-indigo-300 min-h-screen px-4 flex flex-col justify-center mb-32;
+  @apply text-center bg-gradient-to-br from-indigo-400 via-indigo-300 min-h-screen px-4 flex flex-col justify-center;
 }
 .header {
   font-family: "Encode Sans Expanded";
   @apply text-3xl font-bold uppercase tracking-wider my-8;
 }
 form {
-  @apply bg-indigo-200 bg-opacity-40 flex flex-col mx-auto p-5 w-3/4;
+  @apply flex flex-col mx-auto p-5 w-3/4;
 }
 button,
 input[type="file"] {
