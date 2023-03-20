@@ -1,5 +1,6 @@
 <template>
   <section>
+    <HeaderSection class="col-span-2" />
     <FileSection />
     <HistorySection />
   </section>

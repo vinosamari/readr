@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <form @submit.prevent="loadFile">
+  <div id="filesection">
+    <form @submit.prevent="uploadFile">
       <h2 class="subheader">Select a file to interact with:</h2>
       <section v-if="!urlFileTitle">
         <input type="file" ref="fileInput" @change="setTitle" />
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { SUPA } from "@/plugins/supabase";
 export default {
   mounted() {
     this.fadeElements();
@@ -40,6 +41,25 @@ export default {
     };
   },
   methods: {
+    handleFileUpload(event) {
+      const file = event.target.files[0];
+      console.log(`[EVENT TARGET FILES]: ${event.target.files}`);
+      this.uploadFile(file);
+    },
+    async uploadFile(file) {
+      let fileObj = {
+        title: this.uploadFileTitle ? this.uploadFileTitle : this.urlFileTitle,
+      };
+      console.log(`[TITLE]: ${fileObj.title}`);
+      const { data, error } = await SUPA.storage
+        .from("files")
+        .upload(`/${fileObj.title}`, file);
+      if (error) {
+        console.log(`[ERROR: ]${error.message}`);
+      } else {
+        console.log(`Upload complete ${data}`);
+      }
+    },
     async loadFile() {
       let fileObj = {
         title: this.uploadFileTitle ? this.uploadFileTitle : this.urlFileTitle,
