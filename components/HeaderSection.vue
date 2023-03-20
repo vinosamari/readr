@@ -21,7 +21,7 @@ export default {};
 <style scoped>
 div {
   font-family: "Dokdo";
-  @apply min-h-screen text-center flex flex-col items-center justify-center text-2xl px-32;
+  @apply min-h-screen text-center flex flex-col items-center justify-center text-2xl px-32 bg-indigo-300;
 }
 p {
   @apply text-indigo-800 uppercase;

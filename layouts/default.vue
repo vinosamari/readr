@@ -3,13 +3,19 @@
     <navbar v-if="showNavbar" :class="{ 'nav-hidden': !showNavbar }"></navbar>
     <nuxt></nuxt>
     <my-footer></my-footer>
+    <SecondaryNavbar
+      :is-nav-hidden="isNavHidden"
+      v-if="!showNavbar"
+      :class="{ 'nav-hidden': !showNavbar }"
+    />
   </div>
 </template>
 
 <script>
 import MyFooter from "~/components/MyFooter.vue";
+import SecondaryNavbar from "~/components/SecondaryNavbar.vue";
 export default {
-  components: { MyFooter },
+  components: { MyFooter, SecondaryNavbar },
   data() {
     return {
       showNavbar: true,
@@ -35,15 +41,3 @@ export default {
   },
 };
 </script>
-
-<style>
-body {
-  @apply transition-all duration-500 ease-in-out bg-indigo-400 bg-opacity-80;
-}
-
-.nav-hidden {
-  opacity: 0;
-  transform: translateY(-100%);
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-</style>
