@@ -11,9 +11,9 @@
           active: $store.state.showAbout,
         }"
       >
-        About
+        <i class="fa fa-users"></i>
       </button>
-      <button>Help</button>
+      <button><i class="fa fa-question fa-lg"></i></button>
     </div>
     <div class="loginGroup" v-if="$store.state.currentUser === null">
       <form @submit.prevent="loginUser">
@@ -23,6 +23,13 @@
           id="email"
           v-model="email"
           placeholder="you@example.com"
+        />
+        <input
+          type="password"
+          name="password"
+          id="password"
+          v-model="password"
+          placeholder="p@5sW0rD"
         />
         <button @click="$store.commit('TOGGLE_USER')">Login</button>
       </form>
@@ -53,6 +60,7 @@ export default {
   data() {
     return {
       email: "",
+      password: "",
     };
   },
 };
@@ -70,20 +78,24 @@ section {
   @apply text-2xl tracking-wide text-indigo-900;
 }
 img {
-  @apply w-8 h-8;
+  @apply w-8 h-8 rounded shadow-xl;
 }
 form {
   font-family: "Dokdo";
   @apply text-base tracking-widest;
 }
 input {
-  @apply shadow-lg rounded-xl px-3 py-1 focus:ring-0 hover:cursor-pointer hover:ring-indigo-700;
+  @apply shadow-lg rounded-xl px-3 py-1 focus:ring-0 hover:cursor-pointer hover:ring-indigo-700 text-center;
 }
 button {
   @apply bg-indigo-500  rounded-xl shadow-lg px-3 py-1 text-xl hover:bg-white hover:text-indigo-800 text-white hover:rounded-2xl transition-all duration-300 ease-in-out;
 }
+
+.navLinks {
+  @apply flex;
+}
 .navLinks button {
-  @apply text-lg tracking-tight shadow-md hover:shadow-xl bg-transparent text-indigo-700 rounded-sm transition-all duration-300 ease-in-out mx-2 hover:bg-indigo-700 hover:text-white hover:rounded-2xl;
+  @apply text-lg tracking-tight shadow-md hover:shadow-xl bg-transparent text-indigo-700 rounded-sm transition-all duration-300 ease-in-out mx-2 hover:bg-indigo-700 hover:text-white hover:rounded-2xl  items-center flex;
 }
 .navLinks button.active {
   @apply bg-indigo-700 text-white rounded-2xl;

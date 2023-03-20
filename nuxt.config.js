@@ -55,7 +55,10 @@ export default {
   css: ["~/assets/css/styles.css"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: "~/plugins/supabase.js", mode: "client" }],
+  plugins: [
+    { src: "~/plugins/supabase.js", mode: "client" },
+    { src: "~/plugins/vue-toastification.js", mode: "client" },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -92,6 +95,7 @@ export default {
         },
       },
     ],
+    "vue-toastification/nuxt",
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

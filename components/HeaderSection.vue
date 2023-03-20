@@ -10,12 +10,14 @@
       unnecessary details. Join us today and discover the wonders of the world
       with Readr!
     </p>
-    <button @click="$router.push('/#filesection')">Try it out</button>
+    <button @click="$router.replace('/#filesection')">Try it out</button>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {},
+};
 </script>
 
 <style scoped>

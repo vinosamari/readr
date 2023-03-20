@@ -1,11 +1,11 @@
 <template>
   <div class="secondary-navbar" v-if="isNavHidden">
     <i class="fa fa-tasks fa-2x" aria-hidden="true" @click="toggleMenu"></i>
-    <div class="menu" :class="{ 'menu-open': isMenuOpen }">
-      <ul :class="{ hidden: !isMenuOpen }">
-        <li>Menu Item 1</li>
-        <li>Menu Item 2</li>
-        <li>Menu Item 3</li>
+    <div class="menu" :class="{ 'menu-open': isMenuOpen, hidden: !isMenuOpen }">
+      <ul>
+        <li><i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i></li>
+        <li><i class="fa fa-file-text fa-2x" aria-hidden="true"></i></li>
+        <li><i class="fa fa-stack-exchange fa-2x" aria-hidden="true"></i></li>
       </ul>
     </div>
   </div>
@@ -35,20 +35,26 @@ export default {
       });
     },
     toggleMenu() {
+      const items = document.querySelectorAll(".menu li");
+      const staggerDelay = 100;
+
+      // reverse the order of the items
+      const reversedItems = Array.prototype.slice.call(items).reverse();
+
       this.isMenuOpen = !this.isMenuOpen;
       const anime = this.$anime;
       if (this.isMenuOpen) {
         anime({
-          targets: ".menu li",
+          targets: reversedItems,
           opacity: [0, 1],
           translateY: ["50%", 0],
-          duration: 500,
+          duration: 1000,
           easing: "easeOutExpo",
-          delay: anime.stagger(100),
+          delay: (el, i) => i * staggerDelay,
         });
       } else {
         anime({
-          targets: ".menu li",
+          targets: items,
           opacity: [1, 0],
           translateY: [0, "-50%"],
           duration: 500,
@@ -72,6 +78,9 @@ i {
   @apply relative;
 }
 .menu ul {
-  @apply absolute right-3 bottom-32;
+  @apply fixed right-10 bottom-0 flex items-center justify-center;
+}
+li {
+  @apply mx-8;
 }
 </style>

@@ -41,3 +41,9 @@ export default {
   },
 };
 </script>
+
+<style>
+body {
+  @apply transition-all duration-500 ease-in-out bg-indigo-400 bg-opacity-80;
+}
+</style>

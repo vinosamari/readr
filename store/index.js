@@ -1,38 +1,43 @@
+// FOR FAKE USER DATA #TODO SHOULD NOT USE IN PRODUCTION
+let dev = true;
+
 export const state = () => ({
-  // currentUser: null,
-  currentUser: {
-    email: "sapw@vino.com",
-    history: [
-      {
-        filename: "the-first-file.pdf",
-        lastConversation: randomDate(),
-        savedResponses: [
+  currentUser: dev
+    ? null
+    : {
+        email: "sapw@vino.com",
+        history: [
           {
-            question: "Explain blah",
-            response: "Blah blah blah...",
+            filename: "the-first-file.pdf",
+            lastConversation: randomDate(),
+            savedResponses: [
+              {
+                question: "Explain blah",
+                response: "Blah blah blah...",
+              },
+              {
+                question: "Explain blah again",
+                response: "Blah blah blah blah...",
+              },
+            ],
           },
           {
-            question: "Explain blah again",
-            response: "Blah blah blah blah...",
+            filename: "The Other File About Nothing.docx",
+            lastConversation: randomDate(),
+            savedResponses: [
+              {
+                question: "Explain blah",
+                response: "Blah blah blah...",
+              },
+              {
+                question: "Explain blah again",
+                response: "Blah blah blah blah...",
+              },
+            ],
           },
         ],
       },
-      {
-        filename: "The Other File About Nothing.docx",
-        lastConversation: randomDate(),
-        savedResponses: [
-          {
-            question: "Explain blah",
-            response: "Blah blah blah...",
-          },
-          {
-            question: "Explain blah again",
-            response: "Blah blah blah blah...",
-          },
-        ],
-      },
-    ],
-  },
+
   showAbout: false,
 });
 
