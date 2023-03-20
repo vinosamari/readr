@@ -2,6 +2,7 @@
   <div @click="closeModal">
     <div class="notMobile">
       <about class=""></about>
+      <signup-section></signup-section>
       <hero-section class=""></hero-section>
     </div>
     <section class="mobile">
@@ -20,8 +21,9 @@
 <script>
 import About from "~/components/About.vue";
 import FileSection from "~/components/FileSection.vue";
+import SignupSection from "~/components/SignupSection.vue";
 export default {
-  components: { FileSection, About },
+  components: { FileSection, About, SignupSection },
   name: "IndexPage",
   methods: {
     closeModal() {

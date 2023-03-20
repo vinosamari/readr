@@ -11,7 +11,15 @@
           active: $store.state.showAbout,
         }"
       >
-        <i class="fa fa-users"></i>
+        <i class="fa fa-info-circle fa-lg"></i>
+      </button>
+      <button
+        @click="$store.commit('TOGGLE_SIGNUP')"
+        :class="{
+          active: $store.state.showSignUp,
+        }"
+      >
+        <i class="fa fa-user-plus fa-lg"></i>
       </button>
       <button><i class="fa fa-question fa-lg"></i></button>
     </div>
@@ -69,7 +77,7 @@ export default {
 <style scoped>
 section {
   font-family: "Dokdo";
-  @apply flex p-3 justify-between w-3/4 shadow-2xl rounded-3xl fixed left-40 top-10 px-8;
+  @apply flex  justify-between w-3/4 shadow-2xl rounded-3xl fixed left-40 top-10 px-8 py-5;
 }
 .logo {
   @apply flex gap-1 items-center;

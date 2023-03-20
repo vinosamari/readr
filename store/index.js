@@ -39,6 +39,7 @@ export const state = () => ({
       },
 
   showAbout: false,
+  showSignUp: false,
 });
 
 export const actions = {};
@@ -86,7 +87,12 @@ export const getters = {
 };
 export const mutations = {
   TOGGLE_ABOUT: (state) => {
+    state.showSignUp = false;
     state.showAbout = !state.showAbout;
+  },
+  TOGGLE_SIGNUP: (state) => {
+    state.showAbout = false;
+    state.showSignUp = !state.showSignUp;
   },
   TOGGLE_USER: (state) => {
     if (state.currentUser === null) {
