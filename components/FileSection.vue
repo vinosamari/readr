@@ -1,6 +1,6 @@
 <template>
   <div id="filesection">
-    <form @submit.prevent="handleFileUpload">
+    <form @submit.prevent="uploadFile">
       <h2 class="subheader">Select a file to interact with:</h2>
       <section v-if="!urlFileTitle">
         <input type="file" ref="fileInput" @change="setTitle" />
@@ -30,6 +30,7 @@
 import { SUPA } from "@/plugins/supabase";
 export default {
   mounted() {
+    console.log("NEW NEW");
     this.fadeElements();
   },
   data() {
@@ -52,70 +53,77 @@ export default {
         this.uploadFile(file);
       }
     },
-    async uploadFile(file) {
-      let fileObj = {
-        title: this.uploadFileTitle ? this.uploadFileTitle : this.urlFileTitle,
-      };
-      console.log(`[TITLE]: ${fileObj.title}`);
-      const { data, error } = await SUPA.storage
-        .from("files")
-        .upload(`/${fileObj.title}`, file);
-      if (error) {
-        console.log(`[ERROR: ]${error.message}`);
-      } else {
-        console.log(`Upload complete ${data}`);
-      }
-    },
-    // async loadFile() {
+    // async uploadFile(file) {
     //   let fileObj = {
     //     title: this.uploadFileTitle ? this.uploadFileTitle : this.urlFileTitle,
     //   };
-
-    //   const file = this.$refs.fileInput.files[0];
-    //   const storageRef = this.$fire.storage.ref("files/").child(fileObj.title);
-    //   try {
-    //     storageRef.put(file).on(
-    //       "state_changed",
-    //       (snapshot) => {
-    //         // Observe state change events such as progress, pause, and resume
-    //         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-    //         var progress =
-    //           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    //         this.fileUploadProgress = progress;
-    //         console.log("Upload is " + progress + "% done");
-    //         // console.log(`Snapshot state ${snapshot.state}`);
-    //       },
-    //       (error) => {
-    //         // Handle unsuccessful uploads
-    //       },
-    //       () => {
-    //         // Handle successful uploads on complete
-    //         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-    //         storageRef.getDownloadURL().then(async (downloadURL) => {
-    //           fileObj = { ...fileObj, url: downloadURL };
-
-    //           let dbFiles = $nuxt.$fire.firestore.collection("files");
-    //           await dbFiles
-    //             .doc()
-    //             .set(fileObj)
-    //             .then(() => {
-    //               console.log("Document successfully written!");
-    //             })
-    //             .catch((error) => {
-    //               console.error("Error writing document: ", error);
-    //             });
-
-    //           this.urlFileTitle = "";
-    //           this.uploadFileTitle = "";
-    //           this.fileUploadProgress = 0;
-    //           console.log("File available at", downloadURL);
-    //         });
-    //       }
-    //     );
-    //   } catch (e) {
-    //     alert(e.message);
+    //   console.log(`[TITLE]: ${fileObj.title}`);
+    //   const { data, error } = await SUPA.storage
+    //     .from("files")
+    //     .upload(`/${fileObj.title}`, file);
+    //   if (error) {
+    //     console.log(`[ERROR: ]${error.message}`);
+    //   } else {
+    //     console.log(`Upload complete ${data}`);
     //   }
     // },
+    async uploadFile(event) {
+      if (!event.target) {
+        this.$toast.error("No file loaded!", {
+          timeout: 2000,
+        });
+        return;
+      }
+      let fileObj = {
+        title: this.uploadFileTitle ? this.uploadFileTitle : this.urlFileTitle,
+      };
+      if (!file) {
+      }
+      const file = this.$refs.fileInput.files[0];
+      const storageRef = this.$fire.storage.ref("files/").child(fileObj.title);
+      try {
+        storageRef.put(file).on(
+          "state_changed",
+          (snapshot) => {
+            // Observe state change events such as progress, pause, and resume
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            var progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            this.fileUploadProgress = progress;
+            console.log("Upload is " + progress + "% done");
+            // console.log(`Snapshot state ${snapshot.state}`);
+          },
+          (error) => {
+            // Handle unsuccessful uploads
+          },
+          () => {
+            // Handle successful uploads on complete
+            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+            storageRef.getDownloadURL().then(async (downloadURL) => {
+              fileObj = { ...fileObj, url: downloadURL };
+
+              let dbFiles = $nuxt.$fire.firestore.collection("files");
+              await dbFiles
+                .doc()
+                .set(fileObj)
+                .then(() => {
+                  console.log("Document successfully written!");
+                })
+                .catch((error) => {
+                  console.error("Error writing document: ", error);
+                });
+
+              this.urlFileTitle = "";
+              this.uploadFileTitle = "";
+              this.fileUploadProgress = 0;
+              console.log("File available at", downloadURL);
+            });
+          }
+        );
+      } catch (e) {
+        alert(e.message);
+      }
+    },
     setTitle(event) {
       // IF THERE ARE ANY FILES READY
       if (event.target.files.length > 0) {

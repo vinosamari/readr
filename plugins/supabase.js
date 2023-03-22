@@ -2,8 +2,6 @@ import { createClient } from "@supabase/supabase-js";
 
 // Create a single supabase client for interacting with your database
 export const SUPA = createClient(
-  "https://kjklprepamtfqqslgrlw.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtqa2xwcmVwYW10ZnFxc2xncmx3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzkyMzMwNDYsImV4cCI6MTk5NDgwOTA0Nn0.aD9Rsh9zwzzHK2fyaSMgQg4BeDlfnG497rNKfEUVNLA"
+  "https://gfzmajhpuunnvprzyufl.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdmem1hamhwdXVubnZwcnp5dWZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2Nzk0OTg4MzgsImV4cCI6MTk5NTA3NDgzOH0.Ce_4mgt5biv1jV01bi8THvigUrSgvZgBNH3Tvb2tTJI"
 );
-
-console.log(`SUPA IS ${SUPA}`);
